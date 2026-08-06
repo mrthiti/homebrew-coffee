@@ -1,11 +1,11 @@
 cask "coffee" do
-  version "1.0.0"
+  version "1.1.0"
 
   # Kept as their own lines (rather than inline in the sha256 calls below)
   # so .github/workflows/release.yml can update them with a simple sed on
   # every tagged release, without needing to tell the two sha256 lines apart.
-  arm_sha256   = "b0c96815c3bc2f957839e6f3488714df92eb6238ba059bada5670007f49ff9c8"
-  intel_sha256 = "e17a3301802be589b24bd439059cd2719d85cff5eb1f6aeef0a78c9b2b22f84f"
+  arm_sha256   = "6111c3e0f30c5ebcd36afeb1e171b1125e3a45fedd6f337f2954e6bc3316d473"
+  intel_sha256 = "234764ce342b7f9d34a1b024f7d0b855797f6e139132f977c1717d434751fb76"
 
   on_arm do
     url "https://github.com/mrthiti/coffee/releases/download/v#{version}/coffee-darwin-arm64"
