@@ -24,6 +24,13 @@ cask "coffee" do
   homepage "https://github.com/mrthiti/coffee"
 
   postflight do
+    # brew's own quarantine handling doesn't reliably clear the bit on a
+    # bare `binary` artifact (unlike `app`/`pkg`), and this binary isn't
+    # code-signed/notarized (no Apple Developer ID), so Gatekeeper still
+    # blocks it on first run otherwise. install.sh does the same thing.
+    system_command "/bin/sh",
+                    args: ["-c", "/usr/bin/xattr -dr com.apple.quarantine \"#{staged_path}\" 2>/dev/null || true"]
+
     user = ENV["USER"] || Utils.safe_popen_read("id", "-un").strip
     rule = "#{user} ALL=(root) NOPASSWD: /usr/bin/pmset -a disablesleep 0, /usr/bin/pmset -a disablesleep 1\n"
 
